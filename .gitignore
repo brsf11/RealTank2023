@@ -1,0 +1,8 @@
+/keil/
+/vivado/
+!/vivado/pin.xdc
+/modelsim/
+/rtl/APB
+/rtl/RealTankSoCBusMtx/
+/rtl/cortexm0ds_logic.v
+rtl/UART/cmsdk_apb_uart.v
