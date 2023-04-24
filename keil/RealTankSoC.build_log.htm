@@ -1,0 +1,58 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.18.0.0
+Copyright (C) 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 11 admin, brsf, LIC=BL28G-VT2J7-XCRJ0-BV75N-L92M3-R1GMI
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.18
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 1 (build 61)
+Assembler:       Armasm.exe V5.06 update 1 (build 61)
+Linker/Locator:  ArmLink.exe V5.06 update 1 (build 61)
+Library Manager: ArmAr.exe V5.06 update 1 (build 61)
+Hex Converter:   FromElf.exe V5.06 update 1 (build 61)
+CPU DLL:         SARMCM3.DLL V5.18
+Dialog DLL:      DARMCM1.DLL V1.12.0.0
+Target DLL:      CMSIS_AGDI.dll V1.25.7.0
+Dialog DLL:      TARMCM1.DLL V1.9.0.0
+ 
+<h2>Project:</h2>
+C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RealTankSoC.uvprojx
+Project File Date:  04/17/2023
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'Target 1'
+compiling Buzzer.c...
+assembling startup_CMSDK_CM0.s...
+compiling UART.c...
+compiling Timer.c...
+compiling RealTank.c...
+compiling code_def.c...
+compiling LCD.c...
+compiling Game.c...
+compiling main.c...
+..\src\main.c(54): warning:  #111-D: statement is unreachable
+      return 0;
+..\src\main.c: 1 warning, 0 errors
+linking...
+.\RealTankSoC.axf: Warning: L6305W: Image does not have an entry point. (Not specified or not set due to multiple choices.)
+Program Size: Code=716 RO-data=3532 RW-data=28 ZI-data=1204  
+Finished: 0 information, 1 warning and 0 error messages.
+After Build - User command #1: fromelf -cvf .\RealTankSoC.axf --vhx --32x1 -o code.hex
+After Build - User command #2: fromelf -cvf .\RealTankSoC.axf -o code.txt
+".\RealTankSoC.axf" - 0 Error(s), 2 Warning(s).
+
+<h2>Collection of Component include folders:</h2>
+  C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE
+  C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>

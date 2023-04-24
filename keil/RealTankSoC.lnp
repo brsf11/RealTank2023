@@ -1,0 +1,14 @@
+--cpu Cortex-M0
+".\main.o"
+".\realtank.o"
+".\game.o"
+".\buzzer.o"
+".\code_def.o"
+".\lcd.o"
+".\timer.o"
+".\uart.o"
+".\startup_cmsdk_cm0.o"
+--library_type=microlib --strict --scatter ".\RealTankSoC.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\RealTankSoC.map" -o .\RealTankSoC.axf

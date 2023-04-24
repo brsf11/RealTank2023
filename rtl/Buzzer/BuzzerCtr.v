@@ -6,7 +6,7 @@ module BuzzerCtr(input wire clk,rst_n,
                  output reg TunePWMRstn,
                  output wire TunePWMEn,
                  output reg BDMAstart,BDMARstn,BDMAAddrSel,fetch,
-                 output reg ref);
+                 output reg ref_out);
 
     parameter S0       = 3'b000;
     parameter ReadNMov = 3'b001;
@@ -41,7 +41,7 @@ module BuzzerCtr(input wire clk,rst_n,
                     BDMARstn    = 1;
                     BDMAAddrSel = 0;
                     fetch       = 0;
-                    ref         = 0;
+                    ref_out     = 0;
                 end
                 else begin
                     next_state = S0;
@@ -55,7 +55,7 @@ module BuzzerCtr(input wire clk,rst_n,
                     BDMARstn    = 0;
                     BDMAAddrSel = 0;
                     fetch       = 0;
-                    ref         = 0;
+                    ref_out     = 0;
                 end
             end
             ReadNMov:begin
@@ -72,7 +72,7 @@ module BuzzerCtr(input wire clk,rst_n,
                         BDMARstn    = 1;
                         BDMAAddrSel = 1;
                         fetch       = 1;
-                        ref         = 0;
+                        ref_out     = 0;
                     end
                     else begin
                         next_state = ReadNMov;
@@ -86,7 +86,7 @@ module BuzzerCtr(input wire clk,rst_n,
                         BDMARstn    = 1;
                         BDMAAddrSel = 0;
                         fetch       = 0;
-                        ref         = 0;
+                        ref_out     = 0;
                     end
                 end
                 else begin
@@ -101,7 +101,7 @@ module BuzzerCtr(input wire clk,rst_n,
                     BDMARstn    = 0;
                     BDMAAddrSel = 0;
                     fetch       = 0;
-                    ref         = 0;
+                    ref_out     = 0;
                 end
             end
             PLAY:begin
@@ -119,7 +119,7 @@ module BuzzerCtr(input wire clk,rst_n,
                             BDMARstn    = 1;
                             BDMAAddrSel = 1;
                             fetch       = 0;
-                            ref         = 0;
+                            ref_out     = 0;
                         end
                         else begin
                             next_state = PLAY;
@@ -133,7 +133,7 @@ module BuzzerCtr(input wire clk,rst_n,
                             BDMARstn    = 1;
                             BDMAAddrSel = 1;
                             fetch       = 0;
-                            ref         = 0;
+                            ref_out     = 0;
                         end
                     end
                     else begin
@@ -148,7 +148,7 @@ module BuzzerCtr(input wire clk,rst_n,
                         BDMARstn    = 1;
                         BDMAAddrSel = 1;
                         fetch       = 0;
-                        ref         = 0;
+                        ref_out     = 0;
                     end
                 end
                 else begin
@@ -163,7 +163,7 @@ module BuzzerCtr(input wire clk,rst_n,
                     BDMARstn    = 0;
                     BDMAAddrSel = 0;
                     fetch       = 0;
-                    ref         = 0;
+                    ref_out     = 0;
                 end
             end
             STOP:begin
@@ -180,7 +180,7 @@ module BuzzerCtr(input wire clk,rst_n,
                         BDMARstn    = 1;
                         BDMAAddrSel = 1;
                         fetch       = 0;
-                        ref         = 0;
+                        ref_out     = 0;
                     end
                     else begin
                         next_state = PLAY;
@@ -194,7 +194,7 @@ module BuzzerCtr(input wire clk,rst_n,
                         BDMARstn    = 1;
                         BDMAAddrSel = 1;
                         fetch       = 0;
-                        ref         = 0;
+                        ref_out     = 0;
                     end
                 end
                 else begin
@@ -209,7 +209,7 @@ module BuzzerCtr(input wire clk,rst_n,
                     BDMARstn    = 0;
                     BDMAAddrSel = 0;
                     fetch       = 0;
-                    ref         = 0;
+                    ref_out     = 0;
                 end
             end
             STAY:begin
@@ -227,7 +227,7 @@ module BuzzerCtr(input wire clk,rst_n,
                             BDMARstn    = 1;
                             BDMAAddrSel = 1;
                             fetch       = 0;
-                            ref         = 0;
+                            ref_out     = 0;
                         end
                         else begin
                             next_state = S0;
@@ -241,7 +241,7 @@ module BuzzerCtr(input wire clk,rst_n,
                             BDMARstn    = 0;
                             BDMAAddrSel = 1;
                             fetch       = 0;
-                            ref         = 1;
+                            ref_out     = 1;
                         end
                     end
                     else begin
@@ -256,7 +256,7 @@ module BuzzerCtr(input wire clk,rst_n,
                         BDMARstn    = 1;
                         BDMAAddrSel = 1;
                         fetch       = 0;
-                        ref         = 0;
+                        ref_out     = 0;
                     end
                 end
                 else begin
@@ -271,7 +271,7 @@ module BuzzerCtr(input wire clk,rst_n,
                     BDMARstn    = 0;
                     BDMAAddrSel = 0;
                     fetch       = 0;
-                    ref         = 0;
+                    ref_out     = 0;
                 end
             end
             MOVE:begin
@@ -287,7 +287,7 @@ module BuzzerCtr(input wire clk,rst_n,
                     BDMARstn    = 1;
                     BDMAAddrSel = 1;
                     fetch       = 1;
-                    ref         = 0;
+                    ref_out     = 0;
                 end
                 else begin
                     next_state = S0;
@@ -301,7 +301,7 @@ module BuzzerCtr(input wire clk,rst_n,
                     BDMARstn    = 1;
                     BDMAAddrSel = 0;
                     fetch       = 0;
-                    ref         = 0;
+                    ref_out     = 0;
                 end
             end
             default:begin
@@ -316,7 +316,7 @@ module BuzzerCtr(input wire clk,rst_n,
                 BDMARstn    = 0;
                 BDMAAddrSel = 0;
                 fetch       = 0;
-                ref         = 0;
+                ref_out     = 0;
             end
         endcase
     end

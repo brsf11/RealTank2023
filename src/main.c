@@ -14,9 +14,9 @@ uint16_t x,nx;
 int main()
 {
     NVIC_CTRL_ADDR = 0x0;
-	Delay(6000000);
+	Delay(100);
 	LCD_init();
-	Delay(1000000);
+	Delay(100);
     GameInit();
 
     UART_Init();

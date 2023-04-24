@@ -9,7 +9,7 @@ module Block_ROM_init_data # (
 (* ramstyle = "AUTO" *) reg [DATA_WIDTH-1 : 0] mem[(2**ADDR_WIDTH-1) : 0];
 
 initial begin
-    $readmemh("C:/code/RealTank2021/rtl/LCD_printer/data.hex", mem);
+    $readmemh("/mnt/hgfs/VMShare/code/RealTank2023/rtl/LCD_printer/data.hex", mem);
 end
 
 always @ (*) begin

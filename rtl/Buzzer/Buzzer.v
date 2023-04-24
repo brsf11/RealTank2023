@@ -117,7 +117,7 @@ module Buzzer #(parameter isSim = 0,parameter isAHB = 1) (input wire clk,rst_n,
 		.BDMARstn         (BDMARstn_BGM),
 		.BDMAAddrSel      (BDMAAddrSel_BGM),
 		.fetch            (fetch_BGM),
-		.ref              (ref_BGM)
+		.ref_out          (ref_BGM)
     );
 
     BDMA BDMA_BGM(
@@ -218,7 +218,7 @@ module Buzzer #(parameter isSim = 0,parameter isAHB = 1) (input wire clk,rst_n,
 		.BDMARstn         (BDMARstn_Sound),
 		.BDMAAddrSel      (BDMAAddrSel_Sound),
 		.fetch            (fetch_Sound),
-		.ref              (ref_Sound)
+		.ref_out          (ref_Sound)
     );
 
     BDMA BDMA_Sound(

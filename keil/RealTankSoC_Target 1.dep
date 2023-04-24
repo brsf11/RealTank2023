@@ -1,0 +1,36 @@
+Dependencies for Project 'RealTankSoC', Target 'Target 1': (DO NOT MODIFY !)
+F (..\src\main.c)(0x643CD95B)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE-I C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DCMSDK_CM0-o .\main.o --omf_browse .\main.crf --depend .\main.d)
+I (..\src\Driver/code_def.h)(0x640EF4ED)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569DEA3A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x569DEA3A)
+I (..\src\Driver/Buzzer.h)(0x640EF4ED)
+I (..\src\Driver/LCD.h)(0x640EF4ED)
+I (..\src\Driver/Timer.h)(0x640EF4ED)
+I (..\src\Driver/UART.h)(0x640EF4ED)
+I (..\src\GameSDK/Game.h)(0x640EF4ED)
+I (..\src\RealTank.h)(0x640EF4ED)
+I (..\src\Asset.h)(0x640EF4ED)
+F (..\src\RealTank.c)(0x640EF4ED)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE-I C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DCMSDK_CM0-o .\realtank.o --omf_browse .\realtank.crf --depend .\realtank.d)
+I (..\src\RealTank.h)(0x640EF4ED)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569DEA3A)
+I (..\src\GameSDK/Game.h)(0x640EF4ED)
+I (..\src\Asset.h)(0x640EF4ED)
+F (..\src\GameSDK\Game.c)(0x640EF4ED)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE-I C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DCMSDK_CM0-o .\game.o --omf_browse .\game.crf --depend .\game.d)
+I (..\src\GameSDK\Game.h)(0x640EF4ED)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569DEA3A)
+F (..\src\Driver\Buzzer.c)(0x640EF4ED)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE-I C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DCMSDK_CM0-o .\buzzer.o --omf_browse .\buzzer.crf --depend .\buzzer.d)
+I (..\src\Driver\Buzzer.h)(0x640EF4ED)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569DEA3A)
+F (..\src\Driver\code_def.c)(0x640EF4ED)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE-I C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DCMSDK_CM0-o .\code_def.o --omf_browse .\code_def.crf --depend .\code_def.d)
+I (..\src\Driver\code_def.h)(0x640EF4ED)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569DEA3A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x569DEA3A)
+F (..\src\Driver\LCD.c)(0x640EF4ED)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE-I C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DCMSDK_CM0-o .\lcd.o --omf_browse .\lcd.crf --depend .\lcd.d)
+I (..\src\Driver\LCD.h)(0x640EF4ED)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569DEA3A)
+F (..\src\Driver\Timer.c)(0x640EF4ED)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE-I C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DCMSDK_CM0-o .\timer.o --omf_browse .\timer.crf --depend .\timer.d)
+I (..\src\Driver\Timer.h)(0x640EF4ED)
+F (..\src\Driver\UART.c)(0x640EF4ED)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE-I C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DCMSDK_CM0-o .\uart.o --omf_browse .\uart.crf --depend .\uart.d)
+I (..\src\Driver\UART.h)(0x640EF4ED)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569DEA3A)
+F (..\src\startup_CMSDK_CM0.s)(0x640EF4ED)(--cpu Cortex-M0 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I C:\Users\admin\Desktop\VMShare\code\RealTank2023\keil\RTE-I C:\Keil_v5\ARM\PACK\Keil\V2M-MPS2_CMx_BSP\1.8.0\Device\CMSDK_CM0\Include-I C:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 518" --pd "CMSDK_CM0 SETA 1"--list .\listings\startup_cmsdk_cm0.lst --xref -o .\startup_cmsdk_cm0.o --depend .\startup_cmsdk_cm0.d)
