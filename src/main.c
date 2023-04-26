@@ -3,6 +3,7 @@
 #include"Driver/LCD.h"
 #include"Driver/Timer.h"
 #include"Driver/UART.h"
+#include"Driver/Inflate.h"
 
 #include"GameSDK/Game.h"
 #include"RealTank.h"
@@ -11,25 +12,34 @@ uint32_t uart_flag;
 uint16_t y,ny;
 uint16_t x,nx;
 
+
+
 int main()
 {
     NVIC_CTRL_ADDR = 0x0;
 	Delay(100);
-	LCD_init();
+	//LCD_init();
+    //PlayBGM(Music_2,0);
+    set_inflate_en(1);
+    Decompress(testpic);
 	Delay(100);
+    //StopBGM();
+    PlaySound(Sound,1);
     GameInit();
 
     UART_Init();
 
     int i,j;
+
+    Draw_pic(black,i*20,j*20,20);
     
-    for(i=0;i<12;i++)
-    {
-        for(j=0;j<16;j++)
-        {
-            Draw_pic(black,i*20,j*20,20);
-        }
-    }
+    // for(i=0;i<12;i++)
+    // {
+    //     for(j=0;j<16;j++)
+    //     {
+    //         Draw_pic(black,i*20,j*20,20);
+    //     }
+    // }
 
     NVIC_CTRL_ADDR = 0x7;
 

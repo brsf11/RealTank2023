@@ -20,17 +20,15 @@
 // initial
 // -------------------------------------------------------------------
 initial begin
-  #10000  $finish;
+  #100000  $finish;
 end
 
 initial begin
   BGM_sw = 1'b1;
   RXD = 1'b1;
   clk = 0;
-  rst_n = 0;
   col = 4'b1111;
   #10;
-  rst_n = 1;
   col = 4'b1111;
 
 end

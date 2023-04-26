@@ -18,3 +18,8 @@ void Draw_pic(const uint16_t* pic,uint16_t x,uint16_t y,uint16_t size)
         PTFIFO = (uint32_t)pic; 
     }
 }
+
+void set_inflate_en(uint8_t en)
+{
+    INFLATE = en ? 1 : 0;
+}

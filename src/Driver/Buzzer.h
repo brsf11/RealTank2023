@@ -14,4 +14,10 @@ typedef struct
 #define Buzzer_BASE 0x40000000
 #define Buzzer ((BuzzerStr *)Buzzer_BASE)
 
+void PlayBGM(const char* BeginAddr,uint32_t isCyl);
+void StopBGM(void);
+void StartBGM(void);
+void PlaySound(const char* BeginAddr,uint32_t Pri);
+void ResetBGM(void);
+
 #endif

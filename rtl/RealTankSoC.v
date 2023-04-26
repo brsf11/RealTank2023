@@ -190,12 +190,24 @@ module RealTankSoC(input  wire       clk,
     wire[31:0] BBDMA_HRDATA;
     wire       BBDMA_HREADY;
 
+    //Buzzer Port
+    wire[31:0] BUZZER_HADDR;
+    wire[1:0]  BUZZER_HTRANS;
+    wire       BUZZER_HWRITE;
+    wire[31:0] BUZZER_HRDATA;
+    wire       BUZZER_HREADY;
+    wire       BUZZER_HREADYOUT;
+
     //Printer DMA Port
     wire[31:0] PTDMA_HADDR;
     wire[1:0]  PTDMA_HTRANS;
     wire       PTDMA_HWRITE;
     wire[31:0] PTDMA_HRDATA;
     wire       PTDMA_HREADY;
+    wire[31:0] MTX_PTDMA_HRDATA;
+    wire       MTX_PTDMA_HREADY;
+    wire[31:0] FIFO_PTDMA_HRDATA;
+    wire       FIFO_PTDMA_HREADY;
 
     //RAMCODE Port
     wire       RAMCODE_HSEL;
@@ -223,6 +235,112 @@ module RealTankSoC(input  wire       clk,
     wire[31:0] RAMDATA_HRDATA;
     wire[1:0]  RAMDATA_HRESP;
 
+    //Inflate core port
+    //APB
+    wire       INFLATE_PWRITE;
+    wire       INFLATE_PSEL;
+    wire       INFLATE_PENABLE;
+    wire[31:0] INFLATE_PWDATA;
+    wire[31:0] INFLATE_PADDR;
+    wire[31:0] INFLATE_PRDATA;
+    //AHB
+    wire       INFLATE_HREADY;
+    wire[31:0] INFLATE_HRDATA;
+    wire[31:0] INFLATE_HADDR;
+    wire[1:0]  INFLATE_HTRANS;
+    //FIFO
+    wire[15:0] INFLATE_data_out;
+    wire       INFLATE_data_out_vld;
+    wire       INFLATE_data_out_rdy;
+    //intr
+    wire       INFLATE_decode_finish;
+
+    reg        INFLATE_EN;
+    reg        INFLATE_WR_EN;
+
+    //Buzzer subsystem mst mux
+    cmsdk_ahb_master_mux #(
+    // Parameters to enable/disable ports
+    .PORT0_ENABLE(0),
+    .PORT1_ENABLE(1),
+    .PORT2_ENABLE(1),
+    .DW          (32)
+    ) Buzzer_mst_mux
+    (
+        // --------------------------------------------------------------------------------
+        // I/O declaration
+        // --------------------------------------------------------------------------------
+
+        .HCLK                (clk      ),       // Clock
+        .HRESETn             (cpuresetn),    // Reset
+
+        // AHB connection to master #0
+        .HSELS0              (1'b0),
+        .HADDRS0             (32'b0),
+        .HTRANSS0            (2'b0),
+        .HSIZES0             (3'b0),
+        .HWRITES0            (1'b0),
+        .HREADYS0            (1'b0),
+        .HPROTS0             (4'b0),
+        .HBURSTS0            (3'b0),
+        .HMASTLOCKS0         (1'b0),
+        .HWDATAS0            (32'b0),
+
+        .HREADYOUTS0         (),
+        .HRESPS0             (),
+        .HRDATAS0            (),
+
+        // AHB connection to master #1
+        .HSELS1              (1'b1),
+        .HADDRS1             (BBDMA_HADDR),
+        .HTRANSS1            (BBDMA_HTRANS),
+        .HSIZES1             (3'b001),
+        .HWRITES1            (1'b0),
+        .HREADYS1            (BBDMA_HREADY),
+        .HPROTS1             (4'b0),
+        .HBURSTS1            (3'b0),
+        .HMASTLOCKS1         (1'b0),
+        .HWDATAS1            (32'b0),
+
+        .HREADYOUTS1         (BBDMA_HREADY),
+        .HRESPS1             (),
+        .HRDATAS1            (BBDMA_HRDATA),
+
+        // AHB connection to master #2
+        .HSELS2              (1'b1),
+        .HADDRS2             (SBDMA_HADDR),
+        .HTRANSS2            (SBDMA_HTRANS),
+        .HSIZES2             (3'b001),
+        .HWRITES2            (1'b0),
+        .HREADYS2            (SBDMA_HREADY),
+        .HPROTS2             (4'b0),
+        .HBURSTS2            (3'b0),
+        .HMASTLOCKS2         (1'b0),
+        .HWDATAS2            (32'b0),
+
+        .HREADYOUTS2         (SBDMA_HREADY),
+        .HRESPS2             (),
+        .HRDATAS2            (SBDMA_HRDATA),
+
+        // AHB output master port
+        .HSELM               (),
+        .HADDRM              (BUZZER_HADDR),
+        .HTRANSM             (BUZZER_HTRANS),
+        .HSIZEM              (),
+        .HWRITEM             (),
+        .HREADYM             (BUZZER_HREADY),
+        .HPROTM              (),
+        .HBURSTM             (),
+        .HMASTLOCKM          (),
+        .HWDATAM             (),
+
+        .HREADYOUTM          (BUZZER_HREADYOUT),
+        .HRESPM              (1'b0),
+        .HRDATAM             (BUZZER_HRDATA),
+
+        .HMASTERM            ()
+    );
+
     RealTankSoCBusMtx RealTankSoCBusMtx(
         //General Signals
         .HCLK           (clk),
@@ -248,10 +366,10 @@ module RealTankSoC(input  wire       clk,
         .HRESPS0                            (HRESP),
         .HRUSERS0                           (),
 
-        //Master1 Signals SBDMA
+        //Master1 Signals Buzzer subsystem
         .HSELS1                             (1'b1),
-        .HADDRS1                            (SBDMA_HADDR),
-        .HTRANSS1                           (SBDMA_HTRANS),
+        .HADDRS1                            (BUZZER_HADDR),
+        .HTRANSS1                           (BUZZER_HTRANS),
         .HWRITES1                           (1'b0),
         .HSIZES1                            (3'b001),
         .HBURSTS1                           (3'b000),
@@ -259,18 +377,18 @@ module RealTankSoC(input  wire       clk,
         .HMASTERS1                          (4'b0000),
         .HWDATAS1                           (32'b0),
         .HMASTLOCKS1                        (1'b0),
-        .HREADYS1                           (SBDMA_HREADY),
+        .HREADYS1                           (BUZZER_HREADY),
         .HAUSERS1                           (32'b0),
         .HWUSERS1                           (32'b0),
-        .HREADYOUTS1                        (SBDMA_HREADY),
+        .HREADYOUTS1                        (BUZZER_HREADYOUT),
         .HRESPS1                            (),
         .HRUSERS1                           (),
-        .HRDATAS1                           (SBDMA_HRDATA),
+        .HRDATAS1                           (BUZZER_HRDATA),
 
         //Master2 Signals BBDMA
         .HSELS2                             (1'b1),
-        .HADDRS2                            (BBDMA_HADDR),
-        .HTRANSS2                           (BBDMA_HTRANS),
+        .HADDRS2                            (INFLATE_HADDR),
+        .HTRANSS2                           (INFLATE_HTRANS),
         .HWRITES2                           (1'b0),
         .HSIZES2                            (3'b001),
         .HBURSTS2                           (3'b000),
@@ -278,16 +396,16 @@ module RealTankSoC(input  wire       clk,
         .HMASTERS2                          (4'b0000),
         .HWDATAS2                           (32'b0),
         .HMASTLOCKS2                        (1'b0),
-        .HREADYS2                           (BBDMA_HREADY),
+        .HREADYS2                           (INFLATE_HREADY),
         .HAUSERS2                           (32'b0),
         .HWUSERS2                           (32'b0),
-        .HREADYOUTS2                        (BBDMA_HREADY),
+        .HREADYOUTS2                        (INFLATE_HREADY),
         .HRESPS2                            (),
         .HRUSERS2                           (),
-        .HRDATAS2                           (BBDMA_HRDATA),
+        .HRDATAS2                           (INFLATE_HRDATA),
 
         //Master3 Signals Printer DMA
-        .HSELS3                             (1'b1),
+        .HSELS3                             (~INFLATE_EN),
         .HADDRS3                            (PTDMA_HADDR),
         .HTRANSS3                           (PTDMA_HTRANS),
         .HWRITES3                           (1'b0),
@@ -300,10 +418,10 @@ module RealTankSoC(input  wire       clk,
         .HREADYS3                           (PTDMA_HREADY),
         .HAUSERS3                           (32'b0),
         .HWUSERS3                           (32'b0),
-        .HREADYOUTS3                        (PTDMA_HREADY),
+        .HREADYOUTS3                        (MTX_PTDMA_HREADY),
         .HRESPS3                            (),
         .HRUSERS3                           (),
-        .HRDATAS3                           (PTDMA_HRDATA),
+        .HRDATAS3                           (MTX_PTDMA_HRDATA),
 
         //Slave0 Signals RAMCODE
         .HSELM0                             (RAMCODE_HSEL),
@@ -474,7 +592,7 @@ module RealTankSoC(input  wire       clk,
         .PORT1_ENABLE (1),
         .PORT2_ENABLE (1),
         .PORT3_ENABLE (1),
-        .PORT4_ENABLE (0),
+        .PORT4_ENABLE (1),
         .PORT5_ENABLE (0),
         .PORT6_ENABLE (0),
         .PORT7_ENABLE (0),
@@ -515,9 +633,9 @@ module RealTankSoC(input  wire       clk,
         .PRDATA3        (Timer_PRDATA),
         .PSLVERR3       (1'b0),
 
-        .PSEL4          (),
-        .PREADY4        (1'b0),
-        .PRDATA4        (32'b0),
+        .PSEL4          (INFLATE_PSEL),
+        .PREADY4        (1'b1),
+        .PRDATA4        (INFLATE_PRDATA),
         .PSLVERR4       (1'b0),
 
         .PSEL5          (),
@@ -735,7 +853,7 @@ wire [3:0]  RAMDATA_WRITE;
         .clk            (clk),
         .rst_n          (cpuresetn),
         .wfull          (PTFIFO_wfull),
-        .HSEL           (PTFIFO_HSEL),
+        .HSEL           (PTFIFO_HSEL&(~PTFIFO_HADDR[2])),
         .HWRITE         (PTFIFO_HWRITE),
         .HREADY         (PTFIFO_HREADY),
         .HTRANS         (PTFIFO_HTRANS),
@@ -746,6 +864,38 @@ wire [3:0]  RAMDATA_WRITE;
         .winc           (PTFIFO_winc),
         .wdata          (PTFIFO_wdata)
     );
+
+//------------------------------------------------------------------------------
+// Inflate core 
+//------------------------------------------------------------------------------
+
+inflate_core inflate_core(
+    .clk                (clk),
+    .rst_n              (cpuresetn),
+    //APB Slave intf
+    .PWRITE             (INFLATE_PWRITE ),
+    .PSEL               (INFLATE_PSEL   ),
+    .PENABLE            (INFLATE_PENABLE),
+    .PWDATA             (INFLATE_PWDATA ),
+    .PADDR              (INFLATE_PADDR  ),
+    .PRDATA             (INFLATE_PRDATA ),
+    //AHB Slave intf
+    .HREADY             (INFLATE_HREADY ),
+    .HRDATA             (INFLATE_HRDATA ),
+    .HADDR              (INFLATE_HADDR  ),
+    .HTRANS             (INFLATE_HTRANS ),
+    //FIFO intf
+    .data_out           (INFLATE_data_out    ),
+    .data_out_vld       (INFLATE_data_out_vld),
+    .data_out_rdy       (INFLATE_data_out_rdy),
+    //intr
+    .decode_finish      (INFLATE_decode_finish)
+);
+
+assign INFLATE_PWRITE  = PWRITE;
+assign INFLATE_PENABLE = PENABLE;
+assign INFLATE_PWDATA  = PWDATA;
+assign INFLATE_PADDR   = {16'b0,PADDR};
 
 //------------------------------------------------------------------------------
 // PTFIFO
@@ -778,6 +928,22 @@ wire [3:0]  RAMDATA_WRITE;
     wire       INFIFO_winc;
     wire[16:0] INFIFO_wdata;
 
+
+
+    always @(posedge clk) begin
+        INFLATE_WR_EN <= PTFIFO_HADDR[2] & PTFIFO_HSEL & PTFIFO_HTRANS[1] & PTFIFO_HWRITE & PTFIFO_HREADY;
+    end
+
+    always @(posedge clk or negedge cpuresetn) begin
+        if(cpuresetn == 1'b0)begin
+            INFLATE_EN <= 1'b0;
+        end
+        else begin
+            if(INFLATE_WR_EN == 1'b1)
+                INFLATE_EN <= PTFIFO_HWDATA[0];
+        end
+    end
+
     Printer Printer(
         .clk            (clk),
         .rst_n          (cpuresetn),
@@ -793,6 +959,26 @@ wire [3:0]  RAMDATA_WRITE;
         .HTRANS         (PTDMA_HTRANS),
         .HWRITE         (PTDMA_HWRITE)
     );
+
+    AHB_FIFO_Read inflate_fifo_read(
+        .clk                (clk),
+        .rst_n              (cpuresetn),
+        .data_in_vld        (INFLATE_data_out_vld),
+        .data_in            (INFLATE_data_out),
+        .HSEL               (INFLATE_EN),
+        .HWRITE             (1'b0),
+        .HREADY             (PTDMA_HREADY),
+        .HTRANS             (PTDMA_HTRANS),
+        .HADDR              (PTDMA_HADDR),
+        .HREADYOUT          (FIFO_PTDMA_HREADY),
+        .HRDATA             (FIFO_PTDMA_HRDATA),
+        .HRESP              (),
+        .data_in_rdy        (INFLATE_data_out_rdy)
+    );
+
+    assign PTDMA_HRDATA = INFLATE_EN ? FIFO_PTDMA_HRDATA : MTX_PTDMA_HRDATA;
+    assign PTDMA_HREADY = INFLATE_EN ? FIFO_PTDMA_HREADY : MTX_PTDMA_HREADY;
+
 
 //------------------------------------------------------------------------------
 // Interface_9341_FIFO

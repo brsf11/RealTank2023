@@ -1,6 +1,6 @@
 #include"Buzzer.h"
 
-void PlayBGM(char* BeginAddr,uint32_t isCyl)
+void PlayBGM(const char* BeginAddr,uint32_t isCyl)
 {
     Buzzer->BuzzerBGMAddr = (uint32_t)BeginAddr;
     if(isCyl)
@@ -23,7 +23,7 @@ void StartBGM()
     Buzzer->BuzzerBGMCtr &= 0xFFFFFFFE;
 }
 
-void PlaySound(char* BeginAddr,uint32_t Pri)
+void PlaySound(const char* BeginAddr,uint32_t Pri)
 {
     Buzzer->BuzzerSoundAddr = (uint32_t)BeginAddr;
     Buzzer->BuzzerSoundCtr  = (Pri << 1) + 1;

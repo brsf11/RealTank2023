@@ -22,6 +22,18 @@ $SHARECODE_ROOT/RealTank2023/rtl/LCD_printer/Interface_9341.v
 $SHARECODE_ROOT/RealTank2023/rtl/LCD_printer/LCD_ini.v
 $SHARECODE_ROOT/RealTank2023/rtl/LCD_printer/Printer.v
 $SHARECODE_ROOT/RealTank2023/rtl/LCD_printer/Printer_ctr.v
+$SHARECODE_ROOT/RealTank2023/rtl/LCD_printer/AHB_FIFO_Read.v
+
+$SHARECODE_ROOT/RealTank2023/rtl/inflate_core/block_ram.v
+$SHARECODE_ROOT/RealTank2023/rtl/inflate_core/huffman_decoder.v
+$SHARECODE_ROOT/RealTank2023/rtl/inflate_core/hufftree_gen.v
+$SHARECODE_ROOT/RealTank2023/rtl/inflate_core/inflate.v
+$SHARECODE_ROOT/RealTank2023/rtl/inflate_core/lz_extractor.v
+$SHARECODE_ROOT/RealTank2023/rtl/inflate_core/sq_extractor.v
+$SHARECODE_ROOT/RealTank2023/rtl/inflate_core/inflate_core.v
+$SHARECODE_ROOT/RealTank2023/rtl/inflate_core/cm_fifo.v
+
+$SHARECODE_ROOT/RealTank2023/rtl/cmsdk_ahb_master_mux/cmsdk_ahb_master_mux.v
 
 $SHARECODE_ROOT/RealTank2023/rtl/RealTankSoCBusMtx/RealTankSoCBusArbM0.v
 $SHARECODE_ROOT/RealTank2023/rtl/RealTankSoCBusMtx/RealTankSoCBusArbM1.v

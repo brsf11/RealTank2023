@@ -6,6 +6,7 @@
 .\main.o: ..\src\Driver/LCD.h
 .\main.o: ..\src\Driver/Timer.h
 .\main.o: ..\src\Driver/UART.h
+.\main.o: ..\src\Driver/Inflate.h
 .\main.o: ..\src\GameSDK/Game.h
 .\main.o: ..\src\RealTank.h
 .\main.o: ..\src\Asset.h

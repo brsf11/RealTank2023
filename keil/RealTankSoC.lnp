@@ -8,6 +8,7 @@
 ".\timer.o"
 ".\uart.o"
 ".\startup_cmsdk_cm0.o"
+".\inflate.o"
 --library_type=microlib --strict --scatter ".\RealTankSoC.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
